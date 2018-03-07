@@ -1,0 +1,40 @@
+{% load rest_framework %}
+<!DOCTYPE html>
+<html>
+    <head>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="/resources/demos/style.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+            $( function() {
+                $( "#datepicker" ).datepicker({
+                dateFormat: "dd-mm-yy",
+                currentText: "Now",
+                });
+            } );
+            function changeDate(obj){
+                alert();
+                //window.location.replace(obj.value);
+            }
+    </script>
+        <style>
+            form {
+            position: absolute;
+            left: 10px;
+            top: 50px;
+            z-index: 1;
+            border-left: 6px solid #0F0099;
+            }
+        </style>
+    </head>
+<body>
+        <form>
+            <b>{{text}}</b></br>
+            Day <input name="day" type="text" id="datepicker">
+            {% if serializer %}
+            {% render_form serializer %}
+            {% endif %}
+            <input type="submit" value="Submit">
+        </form>
+</body>

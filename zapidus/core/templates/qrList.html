@@ -1,0 +1,18 @@
+{% load rest_framework %}
+
+{% if qrlist %}
+    
+    <h2>Lista de Codigos</h2>
+    <table style="width:100%">
+        <tr>
+            <th>Codigo</th>
+            <th>QR</th>
+        </tr>
+        {% for qr in qrlist %}
+        <tr>
+            <th>{{qr.code}}</br> {{qr.address}}</th>
+            <th><img src= "{{qr.url}}"  alt="{{qr.code}}" style="width:256;height:256;"></th>
+        </tr>
+        {% endfor %}
+    </table>  
+{% endif %}

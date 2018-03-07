@@ -1,0 +1,102 @@
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<!-- saved from url=(0046)file:///C:/Users/Gustavo/Desktop/template.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Zapidus</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="{% static 'css/w3.css' %}">
+<link rel="stylesheet" href="{% static 'css/css' %}">
+<link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
+<style>
+html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
+</style>
+
+
+<!-- Top container -->
+<div class="w3-bar w3-top w3-black w3-large" style="z-index:4">
+  <button class="w3-bar-item w3-button w3-hide-large w3-hover-none w3-hover-text-light-grey" onclick="w3_open();"><i class="fa fa-bars"></i> &nbsp;Menu</button>
+  <span class="w3-bar-item w3-right"><a href="/auth/login/?next=/">Login</a> </span>
+</div>
+
+<!-- Sidebar/menu -->
+
+
+
+<!-- Overlay effect when opening sidebar on small screens -->
+<div class="w3-overlay w3-hide-large w3-animate-opacity" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
+
+<!-- !PAGE CONTENT! -->
+<div class="w3-main" style="margin-left:10px;margin-top:43px;">
+
+  <!-- Header -->
+  <header class="w3-container" style="padding-top:22px">
+    <h5><b>Servidor Zapidus</b></h5>
+  </header>
+
+  <div class="w3-row-padding w3-margin-bottom">
+    <div class="w3-quarter w3-button">
+
+      <div class="w3-container w3-red w3-text-white w3-padding-16" onclick="location.href='/maps/'">
+        <div class="w3-clear"></div>
+        <h4>Histórico</h4>
+      </div>
+
+    </div>
+    <div class="w3-quarter w3-button">
+      <div class="w3-container w3-blue  w3-text-white w3-padding-16" onclick="location.href='/addresses/register/'">
+        <div class="w3-clear"></div>
+        <h4>Cadastrar Endereço</h4>
+      </div>
+    </div>
+    <div class="w3-quarter w3-button">
+      <div class="w3-container w3-teal w3-text-white w3-padding-16" onclick="location.href='/orders/'">
+        <div class="w3-clear"></div>
+        <h4>Registrar Encomenda</h4>
+      </div>
+    </div>
+    <div class="w3-quarter w3-button">
+      <div class="w3-container w3-orange w3-text-white w3-padding-16" onclick="location.href='/devices/'">
+        <div class="w3-clear"></div>
+        <h4>Dispositivos</h4>
+      </div>
+    </div>
+  </div>
+	<div class="w3-row-padding w3-margin-bottom">
+    <div class="w3-quarter w3-button">
+      <div class="w3-container w3-orange  w3-text-white w3-padding-16" onclick="location.href='/customers/'">
+        <div class="w3-clear"></div>
+        <h4>Registrar Usuário</h4>
+      </div>
+    </div>
+    <div class="w3-quarter w3-button">
+      <div class="w3-container w3-teal  w3-text-white w3-padding-16" onclick="location.href='/drivers/'">
+        <div class="w3-clear"></div>
+        <h4>Registrar Motorista</h4>
+      </div>
+    </div>
+    <div class="w3-quarter w3-button">
+      <div class="w3-container w3-blue  w3-text-white w3-padding-16" onclick="location.href='/deliveries/'">
+        <div class="w3-clear"></div>
+        <h4>Entregas</h4>
+      </div>
+    </div>
+    <div class="w3-quarter w3-button">
+      <div class="w3-container w3-red w3-text-white w3-padding-16" onclick="location.href='{% static 'monografia.pdf' %}'">
+        <div class="w3-clear"></div>
+        <h4>Download Monografia</h4>
+      </div>
+    </div>
+  </div>
+
+  <div class="w3-panel">
+    <div class="w3-row-padding" style="margin:0 -16px">
+      
+      
+    </div>
+  </div>
+
+</div>
+
+
+</body></html>

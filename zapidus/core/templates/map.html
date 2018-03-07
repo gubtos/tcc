@@ -1,0 +1,104 @@
+{% load rest_framework %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <title>Simple Polylines</title>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+    $( function() {
+      $( "#datepicker" ).datepicker({
+        dateFormat: "dd-mm-yy",
+      });
+    } );
+    function changeDate(obj){
+      alert();
+      //window.location.replace(obj.value);
+     }
+    </script>
+    <style>
+      form {
+        position: absolute;
+        left: 10px;
+        top: 50px;
+        z-index: 1;
+        border-left: 6px solid #0F0099;
+      }
+      /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+      #map {
+        height: 100%;
+      }
+      /* Optional: Makes the sample page fill the window. */
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+  </head>
+  <body>
+      <form>
+        <b>Driver: {{driver}}</b></br>
+        Day <input name="day" type="text" id="datepicker">
+        {% if serializer %}
+        {% render_form serializer %}
+        {% endif %}
+        <input type="submit" value="Search">
+      </form>
+    <div id="map"></div>
+    <script>
+
+      // This example creates a 2-pixel-wide red polyline showing the path of William
+      // Kingsford Smith's first trans-Pacific flight between Oakland, CA, and
+      // Brisbane, Australia.
+
+      function initMap() {
+        var lastPosition = {{ init }};
+        var contentLastPosition = '<div id="content">'+
+            '<div id="siteNotice">'+
+            '</div>'+
+            '<h1 id="firstHeading" class="firstHeading">Responsável: {{driver}}</h1>'+
+            '<div id="bodyContent">'+
+            '<p>{{ init_content }}</p>'+
+            '</div>'+
+            '</div>';;
+        var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 16,	
+          center: lastPosition,
+          mapTypeId: 'terrain'
+        });
+
+        var flightPlanCoordinates = {{ data }};
+        var flightPath = new google.maps.Polyline({
+          path: flightPlanCoordinates,
+          geodesic: true,
+          strokeColor: '#FF0000',
+          strokeOpacity: 1.0,
+          strokeWeight: 2
+        });
+
+        var infowindow = new google.maps.InfoWindow({
+          content: contentLastPosition
+        });
+
+        var marker = new google.maps.Marker({
+          position: lastPosition,
+          map: map,
+          title: 'Ultima Posição'
+        });
+        marker.addListener('click', function() {
+          infowindow.open(map, marker);
+        });
+
+        flightPath.setMap(map);
+      }
+    </script>
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key={{YOUR_API_KEY}}&callback=initMap">
+    </script>
+  </body>
+</html>

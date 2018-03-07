@@ -1,0 +1,126 @@
+{% load rest_framework %}
+<html>
+
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <title>ViaCEP Webservice</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+    <!-- Adicionando Javascript -->
+    <script type="text/javascript">
+        function limpa_formulário_cep() {
+            //Limpa valores do formulário de cep.
+            document.getElementById('street').value = ("");
+            document.getElementById('district').value = ("");
+            document.getElementById('city').value = ("");
+            document.getElementById('state').value = ("");
+        }
+
+        function meu_callback(conteudo) {
+            if (!("erro" in conteudo)) {
+                //Atualiza os campos com os valores.
+                document.getElementById('street').value = (conteudo.logradouro);
+                document.getElementById('district').value = (conteudo.bairro);
+                document.getElementById('city').value = (conteudo.localidade);
+                document.getElementById('state').value = (conteudo.uf);
+            } //end if.
+            else {
+                //CEP não Encontrado.
+                limpa_formulário_cep();
+                alert("CEP não encontrado.");
+            }
+        }
+
+        function pesquisacep(valor) {
+
+            //Nova variável "cep" somente com dígitos.
+            var cep = valor.replace(/\D/g, '');
+
+            //Verifica se campo cep possui valor informado.
+            if (cep != "") {
+
+                //Expressão regular para validar o CEP.
+                var validacep = /^[0-9]{8}$/;
+
+                //Valida o formato do CEP.
+                if (validacep.test(cep)) {
+
+                    //Preenche os campos com "..." enquanto consulta webservice.
+                    document.getElementById('street').value = "...";
+                    document.getElementById('district').value = "...";
+                    document.getElementById('city').value = "...";
+                    document.getElementById('state').value = "...";
+
+                    //Cria um elemento javascript.
+                    var script = document.createElement('script');
+
+                    //Sincroniza com o callback.
+                    script.src = '//viacep.com.br/ws/' + cep + '/json/?callback=meu_callback';
+
+                    //Insere script no documento e carrega o conteúdo.
+                    document.body.appendChild(script);
+
+                } //end if.
+                else {
+                    //cep é inválido.
+                    limpa_formulário_cep();
+                    alert("Formato de CEP inválido.");
+                }
+            } //end if.
+            else {
+                //cep sem valor, limpa formulário.
+                limpa_formulário_cep();
+            }
+        };
+    </script>
+    <style>
+                div.body {
+                  position: absolute;
+                  left: 30%;
+                  top: 5%;
+                  z-index: 1;
+                  width: 40%;
+                }
+    </style>
+</head>
+    <body>
+        <div class="body">
+        <form action="/addresses/" method="post" novalidate>
+            {% csrf_token %}
+            <div class="form-group ">
+                    <label>Nome</label>
+                    <input name="name" class="form-control" type="text">
+            </div>
+            <div class="form-group ">
+                <label>CEP</label>
+                <input name="cep" class="form-control" type="text" id="cep" value="" size="10" maxlength="9" onblur="pesquisacep(this.value);">
+            </div>
+            <div class="form-group ">
+                    <label>Número</label>
+                    <input name="number" class="form-control" type="text">
+            </div>
+            <div class="form-group ">
+                    <label>Rua</label>
+                    <input name="street" class="form-control" id="street" type="text">
+            </div>
+            <div class="form-group ">
+                    <label>Detalhes</label>
+                    <input name="details" class="form-control" type="text">
+            </div>
+            <div class="form-group ">
+                    <label>Bairro</label>
+                    <input name="district" class="form-control" id="district" type="text">
+            </div>
+            <div class="form-group ">
+                <label>Cidade</label>
+                <input name="city" class="form-control" id="city" type="text">
+            </div>
+            <div class="form-group ">
+                    <label>Estado</label>
+                    <input name="state" class="form-control" id="state" size="2" type="text">
+            </div>
+            <input type="submit" value="Save" />
+        </form>
+    </div>
+    </body>
+</html>
