@@ -24,14 +24,31 @@ Run "python3 manage.py runserver" command.
 * [FCM Django](https://github.com/xtrinch/fcm-django) - The Django Firebase Cloud Messaging library used
 
 ## Screenshots
-* Menu
+* **Server** Get Driver Path
 
-![Menu](https://raw.githubusercontent.com/gubtos/tcc/master/Screenshots/menu.PNG)
+![Driver Path](https://raw.githubusercontent.com/gubtos/tcc/master/screenshots/server/testerota.PNG)
+
+* **Server** Address Register Form
+
+![Address Register Form](https://raw.githubusercontent.com/gubtos/tcc/master/screenshots/server/address_form.PNG)
+
+* **Courier App**
+
+![Courier App](https://raw.githubusercontent.com/gubtos/tcc/master/screenshots/app/apos_melhor_rota.png)
+
+* **Client App**
+
+![Client App](https://raw.githubusercontent.com/gubtos/tcc/master/screenshots/app/localizar.png)
+
+* **Client App** Notification
+
+![Client App Notification](https://raw.githubusercontent.com/gubtos/tcc/master/screenshots/app/firebase.jpg)
+
 
 ## Authors
 
 * **Gustavo Okuyama** - *Web Development* - [gubtos](https://github.com/gubtos)
-* **José Filipe Sanchez** - *App Development*
+* **José Filipe Sanchez** - *Android Development*
 
 ## License
 
